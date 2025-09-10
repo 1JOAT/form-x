@@ -1,12 +1,8 @@
-make this readme better man .. 
-add the unnesesary stuffs
 
 # Form-x
 
 A lightweight TypeScript form validation library for hassle-free form validation in frontend applications. Form-x provides a simple, rule-based approach with zero dependencies.
 
-[![npm version](https://badge.fury.io/js/form-x.svg)](https://badge.fury.io/js/form-x)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Why Form-x?
 
