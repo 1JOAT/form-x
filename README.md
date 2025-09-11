@@ -1,4 +1,4 @@
-# @joat/formx
+# @simplyjoat/formx
 
 Zero-config form validation for TypeScript that just works. Built for modern web applications.
 
@@ -13,13 +13,13 @@ Zero-config form validation for TypeScript that just works. Built for modern web
 ## Install
 
 ```bash
-npm install @joat/formx
+npm install @simplyjoat/formx
 ```
 
 ## Usage
 
 ```ts
-import { validateForm } from '@joat/formx'
+import { validateForm } from '@simplyjoat/formx'
 
 // Your form values
 const form = {
