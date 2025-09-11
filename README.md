@@ -1,81 +1,106 @@
-make this readme better man .. 
-add the unnesesary stuffs
+# @joat/formx
 
-# Form-x
+Zero-config form validation for TypeScript that just works. Built for modern web applications.
 
-A lightweight TypeScript form validation library for hassle-free form validation in frontend applications. Form-x provides a simple, rule-based approach with zero dependencies.
+## Features
 
-[![npm version](https://badge.fury.io/js/form-x.svg)](https://badge.fury.io/js/form-x)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+- **Simple API** - Array-based validation rules
+- **Type Safe** - Built with TypeScript for excellent type inference
+- **Zero Config** - Works out of the box with any JS/TS project
+- **No Dependencies** - Tiny footprint, no external dependencies
+- **Framework Agnostic** - Use with React, Vue, Svelte, or vanilla JS
 
-## Why Form-x?
-
-- 🎯 **Simple & Intuitive** - Write validation rules in a declarative way
-- 🚀 **Framework Agnostic** - Works with React, Vue, Svelte, or vanilla JS/TS
-- 📦 **Lightweight** - Zero dependencies, minimal bundle size
-- 💪 **TypeScript First** - Full type safety and autocompletion
-- ⚡ **Performant** - Optimized for quick validation checks
-
-## Installation
+## Install
 
 ```bash
-npm install form-x
-# or
-yarn add form-x
-# or
-pnpm add form-x
+npm install @joat/formx
 ```
 
-## Quick Start
+## Usage
 
-```typescript
-import { validateForm } from "form-x";
+```ts
+import { validateForm } from '@joat/formx'
 
-// Define your form data
-const formData = {
-  username: "johndoe",
-  email: "john@example.com",
-  age: "25"
-};
+// Your form values
+const form = {
+  username: 'alex',
+  email: 'not-an-email',
+  password: 'weak'
+}
 
 // Define validation rules
 const rules = {
-  username: ["required", { minLength: 3 }],
-  email: ["required", "email"],
-  age: ["required", "number", { min: 18 }]
-};
+  username: ['required', 'min:3', 'max:50'],
+  email: ['required', 'email'],
+  password: [
+    'required',
+    'min:8',
+    'min_uppercase:1',
+    'min_lowercase:1',
+    'min_special:1',
+    'min_numeric:1'
+  ]
+}
 
-// Validate!
-const result = validateForm(formData, rules);
+// Validate form
+const result = validateForm(form, rules)
 
-if (result.valid) {
-  console.log("✅ Validation passed:", result.values);
-} else {
-  console.log("❌ Validation failed:", result.errors);
+if (!result.valid) {
+  console.log(result.errors)
+  // {
+  //   email: 'Invalid email address',
+  //   password: 'Must contain at least 1 uppercase letter'
+  // }
+```
+
+## Available Rules
+
+| Rule | Description | Example | Error Message |
+|------|-------------|---------|---------------|
+| `required` | Field must not be empty | `['required']` | 'This field is required' |
+| `email` | Must be a valid email | `['email']` | 'Invalid email address' |
+| `url` | Must be a valid URL | `['url']` | 'Must be a valid URL' |
+| `numeric` | Must contain only numbers | `['numeric']` | 'Must be a number' |
+| `min:n` | Min length | `['min:5']` | 'Must be at least 5 characters' |
+| `max:n` | Max length | `['max:50']` | 'Must not exceed 50 characters' |
+| `min_uppercase:n` | Min uppercase letters | `['min_uppercase:1']` | 'Must contain at least 1 uppercase letter' |
+| `min_lowercase:n` | Min lowercase letters | `['min_lowercase:1']` | 'Must contain at least 1 lowercase letter' |
+| `min_special:n` | Min special chars | `['min_special:1']` | 'Must contain at least 1 special character' |
+| `min_numeric:n` | Min numbers | `['min_numeric:1']` | 'Must contain at least 1 number' |
+
+## Examples
+
+### User Registration
+```ts
+const rules = {
+  username: ['required', 'min:3', 'max:50'],
+  email: ['required', 'email'],
+  password: [
+    'required',
+    'min:8',
+    'min_uppercase:1',
+    'min_lowercase:1', 
+    'min_special:1',
+    'min_numeric:1'
+  ]
 }
 ```
 
-## Built-in Validation Rules
-
-| Rule | Description | Example |
-|------|-------------|---------|
-| `required` | Field must not be empty | `["required"]` |
-| `email` | Must be a valid email format | `["email"]` |
-| `number` | Must be a number | `["number"]` |
-| `minLength` | String must be at least n characters | `[{ minLength: 6 }]` |
-| `min` | Number must be >= n | `[{ min: 18 }]` |
-| `url` | Must be a valid URL | `["url"]` |
-
-### Complex Validation Example
-
-```typescript
+### Profile Form
+```ts
 const rules = {
-  username: ["required", { minLength: 3 }],
-  password: ["required", { minLength: 8 }],
-  email: ["required", "email"],
-  age: ["required", "number", { min: 18 }],
-  website: ["url"] // optional URL field
-};
+  displayName: ['required', 'min:2'],
+  website: ['url'],
+  bio: ['max:500']
+}
+```
+
+### Login Form
+```ts
+const rules = {
+  email: ['required', 'email'],
+  password: ['required']
+}
 ```
 
 ## Error Handling
@@ -94,79 +119,30 @@ The validation result includes detailed error messages:
 }
 ```
 
-## TypeScript Support
-
-Form-x is written in TypeScript and provides full type definitions:
-
-```typescript
-import { ValidationRules, ValidationResult } from "form-x";
-
-interface UserForm {
-  username: string;
-  email: string;
-  age: number;
-}
-
-const rules: ValidationRules<UserForm> = {
-  username: ["required"],
-  email: ["required", "email"],
-  age: ["required", "number"]
-};
-```
-
 ## Development
 
-### Setup
-
 ```bash
-# Clone the repository
+# Clone the repo
 git clone https://github.com/1JOAT/form-x.git
-cd form-x
 
 # Install dependencies
 npm install
-```
 
-### Available Scripts
-
-```bash
 # Run tests
 npm test
 
-# Build the package
+# Build package
 npm run build
-
-# Try the playground
-npx tsx playground.ts
-```
-
-### Playground Example
-
-Create `playground.ts` to try out the library:
-
-```typescript
-import { validateForm } from "./src";
-import { ValidationRules } from "./src/types";
-
-const data = { name: "", email: "invalid" };
-const rules: ValidationRules = {
-  name: ["required"],
-  email: ["required", "email"],
-};
-
-console.log(validateForm(data, rules));
 ```
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Pull requests are welcome! Please make sure to:
 
-## Support
+1. Add tests for new features
+2. Update documentation for API changes
+3. Run tests before submitting
 
-- Star this repo on GitHub ⭐
-- Report issues on [GitHub Issues](https://github.com/1JOAT/form-x/issues)
-- For discussions, use [GitHub Discussions](https://github.com/1JOAT/form-x/discussions)
+## License
+
+MIT © [JOAT](https://github.com/1JOAT)
