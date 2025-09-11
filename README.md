@@ -105,17 +105,49 @@ const rules = {
 
 ## Error Handling
 
-The validation result includes detailed error messages:
+The validation result will be one of two types:
 
-```typescript
-// If validation fails
+### Success Case
+When all validations pass, you get:
+```ts
+{
+  valid: true,
+  values: {
+    username: "johndoe",
+    email: "john@example.com",
+    password: "SecureP@ss123"
+  }
+}
+```
+
+### Error Case
+When validation fails, you get detailed error messages for each field:
+```ts
 {
   valid: false,
   errors: {
-    username: ["Username must be at least 3 characters long"],
-    email: ["Invalid email format"],
-    age: ["Age must be at least 18"]
+    email: "Invalid email address",
+    password: "Must contain at least 1 uppercase letter",
+    username: "Must be at least 3 characters"
   }
+}
+```
+
+### Working with Errors
+
+You can easily handle validation errors in your forms:
+```ts
+const result = validateForm(formData, rules)
+
+if (!result.valid) {
+  // Handle validation errors
+  Object.entries(result.errors).forEach(([field, error]) => {
+    console.log(`${field}: ${error}`)
+    // Update your form UI to show errors
+  })
+} else {
+  // All good! Process the valid data
+  submitForm(result.values)
 }
 ```
 
