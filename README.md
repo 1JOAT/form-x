@@ -1,6 +1,6 @@
 # js-formx
 
-Zero-config form validation for TypeScript that just works. Built for modern web applications.
+Zero-config form validation for javascript and typeScript that just works. Built for modern web applications.
 
 ## Features
 
