@@ -155,7 +155,7 @@ if (!result.valid) {
 
 ```bash
 # Clone the repo
-git clone https://github.com/1JOAT/form-x.git
+git clone https://github.com/1JOAT/js-formx.git
 
 # Install dependencies
 npm install

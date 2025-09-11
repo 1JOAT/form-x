@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { validateForm } from "../src";
 
-describe("Form-x Validation", () => {
+describe("js-formx Validation", () => {
   describe("Basic Validations", () => {
     it("validates required", () => {
       const result = validateForm({ name: "" }, { name: ["required"] });
