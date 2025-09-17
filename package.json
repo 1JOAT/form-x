@@ -1,7 +1,7 @@
 {
   "name": "js-formx",
   "version": "0.2.0",
-  "description": "A lightweight form handling library for JavaScript",
+  "description": "A lightweight form handling library for JavaScript and Typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
