@@ -1,6 +1,6 @@
 {
   "name": "js-formx",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A lightweight form handling library for JavaScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,12 @@
     "test": "vitest",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["form", "validation", "javascript", "typescript"],
+  "keywords": [
+    "form",
+    "validation",
+    "javascript",
+    "typescript"
+  ],
   "author": "Praise Oke (JOAT)",
   "license": "MIT",
   "devDependencies": {
